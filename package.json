@@ -28,7 +28,7 @@
     "formidable": "^1.2.2",
     "i": "^0.3.6",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.12",
+    "mongoose": "^5.9.13",
     "morgan": "^1.10.0",
     "uuid": "^8.0.0",
     "winston": "^3.2.1"
