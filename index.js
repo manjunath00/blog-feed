@@ -9,6 +9,7 @@ const app = express();
 const authRoutes = require("./routes/auth");
 const categoryRoutes = require("./routes/category");
 const articleRoutes = require("./routes/article");
+const userRoutes = require("./routes/user");
 
 // database connections
 mongoose
@@ -33,6 +34,7 @@ app.use(cors());
 app.use("/api", authRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", articleRoutes);
+app.use("/api", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("<h2>Home screen</h2>");
