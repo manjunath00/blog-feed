@@ -25,18 +25,9 @@ const articleSchema = new mongoose.Schema(
       ref: "Category",
       required: true,
     },
-    likedBy: {
-      type: Array,
-      default: [],
-    },
-    dislikedBy: {
-      type: Array,
-      default: [],
-    },
-    blockedBy: {
-      type: Array,
-      default: [],
-    },
+    likedBy: [{ type: ObjectId, ref: "User" }],
+    dislikedBy: [{ type: ObjectId, ref: "User" }],
+    blockedBy: [{ type: ObjectId, ref: "User" }],
   },
   { timestamps: true }
 );

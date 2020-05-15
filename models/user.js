@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const crypto = require("crypto");
 const { v1: uuidv1 } = require("uuid");
+const { ObjectId } = mongoose.Schema;
 
 const userSchema = new mongoose.Schema(
   {
@@ -42,10 +43,10 @@ const userSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    categoryPreferences: {
-      type: Array,
-      default: [],
-    },
+    categoryPreferences: [{ type: ObjectId, ref: "Category" }],
+    likedArticles: [{ type: ObjectId, ref: "Article" }],
+    disLikedArticles: [{ type: ObjectId, ref: "Article" }],
+    blockedArticles: [{ type: ObjectId, ref: "Article" }]
   },
   { timestamps: true }
 );
