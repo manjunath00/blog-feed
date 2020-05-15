@@ -3,15 +3,19 @@ const Article = require("../models/article");
 
 // middleware to fill the article
 exports.getArticleById = (req, res, next, articleId) => {
-  Article.findById(articleId).exec((err, article) => {
-    if (err) {
-      return res.status(400).json({
-        error: "Article not found in DB",
-      });
-    }
+  Article.findById(articleId)
+    .populate("categoryId", "_id categoryName")
+    .populate("authorId", "_id firstName")
+    .populate("likedBy", "_id firstName")
+    .exec((err, article) => {
+      if (err) {
+        return res.status(400).json({
+          error: "Article not found in DB",
+        });
+      }
 
-    req.article = article;
-  });
+      req.article = article;
+    });
 
   next();
 };
@@ -194,7 +198,7 @@ exports.disLikeAnArticle = (req, res) => {
 
 // get all article according to user category preferences
 exports.getUsersFeed = (req, res) => {
-  return res.json({ message: "You will get user's feed" });
+  // Article
 };
 
 // block an article
