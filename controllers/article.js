@@ -127,16 +127,22 @@ exports.getAnArticle = (req, res) => {
 
 // get all articles
 exports.getAllArticles = (req, res) => {
-  Article.find().exec((err, articles) => {
-    if (err) {
-      return res.status(400).json({ error: "No articles found in DB" });
-    }
+  let { categoryPreferences } = req.profile;
+  categoryPreferences = categoryPreferences.map((item) => item._id);
+  Article.find({ categoryId: { $in: categoryPreferences } })
+    .populate("categoryId", "_id categoryName")
+    .populate("authorId", "_id firstName")
+    .exec((err, articles) => {
+      if (err) {
+        console.log(err);
+        return res.status(400).json({ error: "No articles found in DB" });
+      }
 
-    const finalArticles = articles.map((article) =>
-      checkTheReaction(req.profile.id, article)
-    );
-    return res.json(finalArticles);
-  });
+      const finalArticles = articles.map((article) =>
+        checkTheReaction(req.profile.id, article)
+      );
+      return res.json(finalArticles);
+    });
 };
 
 // like an article
