@@ -2,7 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-function Header({ isAuthenticated, userName }) {
+import { signoutStart } from "../../../redux/actions/login";
+
+function Header({ isAuthenticated, userName, signoutStart }) {
+  const onSignOut = () => { 
+    signoutStart();
+  };
+
   function onAuthenticated(username) {
     return (
       <ul>
@@ -21,7 +27,9 @@ function Header({ isAuthenticated, userName }) {
         <li>
           <Link class='nav-link' to='/'>
             <i class='fas fa-power-off hide-mobile'></i>
-            <span class='nav-link__text'>log out</span>
+            <span class='nav-link__text' onClick={onSignOut}>
+              log out
+            </span>
           </Link>
         </li>
       </ul>
@@ -69,4 +77,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(Header);
+export default connect(mapStateToProps, {signoutStart})(Header);
