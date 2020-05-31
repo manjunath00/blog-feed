@@ -4,24 +4,28 @@ import { withRouter } from "react-router-dom";
 
 import ArticleItem from "../ArticleItem";
 import { articlesReq } from "../../../redux/actions/article";
+import LoadingSpinner from "../../common/LoadingSpinner";
 
-function Mainbar({ articles, articlesReq }) {
-  console.log(articles);
+function Mainbar({ articles, articlesReq }) { 
   useEffect(() => {
     articlesReq();
   }, []);
 
-  const feed = articles.length > 0 ? articles : [];
-  return (
-    <div class='main-bar'>
-      <ul class='articles-list'>
-        {feed &&
-          feed.map((article) => (
-            <ArticleItem article={article} key={article._id} />
-          ))}
-      </ul>
-    </div>
-  );
+  if (articles) {
+    const feed = articles.length > 0 ? articles : [];
+    return (
+      <div class='main-bar'>
+        <ul class='articles-list'>
+          {feed &&
+            feed.map((article) => (
+              <ArticleItem article={article} key={article._id} />
+            ))}
+        </ul>
+      </div>
+    );
+  } else {
+    return <LoadingSpinner />;
+  }
 }
 
 const mapStateToProps = (state) => {
