@@ -29,3 +29,9 @@ export const createAnArticle = (userId, body) => {
   const url = endpoints.newArticle(userId);
   return buzzfeed.post(url, body);
 };
+
+/* sign out */
+export const signout = () => {
+  const url = endpoints.signout();
+  return buzzfeed.get(url);
+};
