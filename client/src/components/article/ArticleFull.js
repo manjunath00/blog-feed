@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
+import LoadingSpinner from "../common/LoadingSpinner";
 import { getAnArticle } from "../../redux/actions/article";
 
 function ArticleFull({ match, getAnArticle, article }) {
@@ -70,7 +71,7 @@ function ArticleFull({ match, getAnArticle, article }) {
       </div>
     );
   } else {
-    return <div className='lds-dual-ring'> </div>;
+    return <LoadingSpinner />
   }
 }
 
