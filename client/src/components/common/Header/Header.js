@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { signoutStart } from "../../../redux/actions/login";
 
 function Header({ isAuthenticated, userName, signoutStart }) {
-  const onSignOut = () => { 
+  const onSignOut = () => {
     signoutStart();
   };
 
@@ -40,15 +40,18 @@ function Header({ isAuthenticated, userName, signoutStart }) {
     return (
       <ul>
         <li>
-          <Link class='nav-link n-link-active' to='/'>
+          <NavLink class='nav-link' to='/' activeClassName='n-link-active'>
             <i class='fas fa-user hide-mobile'></i>
             <span class='nav-link__text'>Log In</span>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link class='nav-link' to='/signup'>
+          <NavLink
+            class='nav-link'
+            to='/signup'
+            activeClassName='n-link-active'>
             <span class='nav-link__text'>Sign Up</span>
-          </Link>
+          </NavLink>
         </li>
       </ul>
     );
@@ -77,4 +80,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {signoutStart})(Header);
+export default connect(mapStateToProps, { signoutStart })(Header);
