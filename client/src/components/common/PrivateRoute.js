@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -13,7 +13,7 @@ const PrivateRoute = (props) => {
       />
     );
   } else {
-    return <Redirect to="/" />;
+    return <Redirect to='/' />;
   }
 };
 
@@ -25,4 +25,4 @@ const mapStateToProps = (state) => {
   return { isAuthenticated: state.auth.isAuthenticated };
 };
 
-export default connect(mapStateToProps, null)(PrivateRoute);
+export default withRouter(connect(mapStateToProps, null)(PrivateRoute));
