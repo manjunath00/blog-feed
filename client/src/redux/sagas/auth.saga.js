@@ -12,6 +12,7 @@ function* loginAsync(action) {
     const auth = {
       _id: response.data.user._id,
       email: response.data.user.email,
+      name: response.data.user.firstName
     };
    
     yield put(loginSuccess(auth));
