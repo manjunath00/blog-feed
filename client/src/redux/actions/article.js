@@ -7,11 +7,14 @@ import {
   REQ_ARTICLES,
   REQ_ARTICLES_SUCCESS,
   REQ_ARTICLES_FAILURE,
+  REQ_AN_ARTICLE,
+  REQ_AN_ARTICLE_SUCCESS,
+  REQ_AN_ARTICLE_FAILURE,
 } from "./types";
 
-const articlesReq = () => {  
+const articlesReq = () => {
   return {
-    type: REQ_ARTICLES, 
+    type: REQ_ARTICLES,
   };
 };
 
@@ -26,6 +29,28 @@ const articlesReqSuccess = (data) => {
 const articlesReqFailure = (data) => {
   return {
     type: REQ_ARTICLES_FAILURE,
+    payload: data,
+  };
+};
+
+const getAnArticle = (articleId) => {
+  console.log(articleId);
+  return {
+    type: REQ_AN_ARTICLE,
+    payload: articleId,
+  };
+};
+
+const getAnArticleSuccess = (data) => {
+  return {
+    type: REQ_AN_ARTICLE_SUCCESS,
+    payload: data,
+  };
+};
+
+const getAnArticleFailure = (data) => {
+  return {
+    type: REQ_AN_ARTICLE_FAILURE,
     payload: data,
   };
 };
@@ -59,3 +84,4 @@ const articlesReqFailure = (data) => {
 // };
 
 export { articlesReq, articlesReqSuccess, articlesReqFailure };
+export { getAnArticle, getAnArticleSuccess, getAnArticleFailure };
