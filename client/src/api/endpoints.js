@@ -3,7 +3,8 @@ const endpoints = {
   signup: () => `/api/signup`,
   getUsersFeed: (userId) => `/api/articles/${userId}/all`,
   usersCategories: (userId) => `/api/user/${userId}`,
-  getAnArticle: (userId, articleId) => `api/article/${articleId}/${userId}`,
+  getAnArticle: (userId, articleId) => `/api/article/${articleId}/${userId}`,
+  newArticle: (userId) => `/api/article/create/${userId}`
 };
 
 export default endpoints;

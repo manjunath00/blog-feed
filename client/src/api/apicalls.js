@@ -23,3 +23,9 @@ export const getAnArticle = (userId, articleId) => {
   const url = endpoints.getAnArticle(userId, articleId);
   return buzzfeed.get(url);
 };
+
+/* post an article */
+export const createAnArticle = (userId, body) => {
+  const url = endpoints.newArticle(userId);
+  return buzzfeed.post(url, body);
+};
