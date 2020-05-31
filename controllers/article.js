@@ -132,6 +132,7 @@ exports.getAllArticles = (req, res) => {
   Article.find({ categoryId: { $in: categoryPreferences } })
     .populate("categoryId", "_id categoryName")
     .populate("authorId", "_id firstName")
+    .sort({ createdAt: -1})
     .exec((err, articles) => {
       if (err) {
         console.log(err);
