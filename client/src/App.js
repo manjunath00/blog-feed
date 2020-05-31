@@ -1,58 +1,67 @@
 import React from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { withRouter, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Base from "./components/common/Base";
 import PrivateRoute from "./components/common/PrivateRoute";
 import { ArticleFeed, ArticleNew, ArticleFull } from "./components/article";
 import { Login, Signup, Settings, Dashboard } from "./components/user";
+import { CategoryFeed } from "./components/category";
 
 function App(props) {
-  // const initComponent = props.isAuthenticated ? <ArticleFeed /> : <Login />;
   return (
-    <BrowserRouter>
-      <Base>
-        <Route exact={true} path="/" {props.isAuthenticated ? <Redirect to="/"/> : null} />
-        <Route exact={true} path="/signup" component={Signup} />
+    <Base>
+      <Route exact={true} path='/signup' component={Signup} />
+      <Route
+        exact={true}
+        path='/'
+        render={() => {
+          if (props.isAuthenticated) {
+            return <ArticleFeed />;
+          } else {
+            return <Login />;
+          }
+        }}
+      />
+      <Switch>
+        {/* <Switch> */}
+        <PrivateRoute
+          exact={true}
+          path='/category/:categoryId'
+          component={CategoryFeed}
+        />
+        <PrivateRoute
+          exact={true}
+          path='/category/:categorddyId'
+          component={CategoryFeed}
+        />
+        {/* </Switch> */}
 
         <Switch>
-          <Route
-            to="/articlefeed"
-            component={props.isAuthenticated ? ArticleFeed : Login}
-          />
           <PrivateRoute
             exact={true}
-            path="/article/new"
-            component={ArticleNew}
-          />
-          <PrivateRoute
-            exact={true}
-            path="/article/:id"
+            path='/article/view/:articleId'
             component={ArticleFull}
           />
+          <PrivateRoute exact path='/article/new' component={ArticleNew} />
           <PrivateRoute
             exact={true}
-            path="/article/:id/edit"
+            path='/article/edit/:id'
             component={ArticleNew}
           />
-          <PrivateRoute
-            exact={true}
-            path="/user/settings"
-            component={Settings}
-          />
-          <PrivateRoute
-            exact={true}
-            path="/user/dashboard"
-            component={Dashboard}
-          />
-          <PrivateRoute
-            exact={true}
-            path="/category/science"
-            component={Dashboard}
-          />
         </Switch>
-      </Base>
-    </BrowserRouter>
+
+        {/* <Switch> */}
+
+        <PrivateRoute exact={true} path='/user/settings' component={Settings} />
+        <PrivateRoute
+          exact={true}
+          path='/user/dashboard'
+          component={Dashboard}
+        />
+        {/* </Switch> */}
+      </Switch>
+    </Base>
   );
 }
 
@@ -60,4 +69,4 @@ const mapStateToProps = (state) => {
   return { isAuthenticated: state.auth.isAuthenticated };
 };
 
-export default connect(mapStateToProps, {})(App);
+export default withRouter(connect(mapStateToProps, {})(App));
