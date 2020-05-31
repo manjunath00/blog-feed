@@ -1,6 +1,5 @@
 /* eslint-disable */
 import {
-  // REQ_ARTICLE_NEW,
   // REQ_ARTICLE_EDIT,
   // REQ_ARTICLE_LIKE,
   // REQ_ARTICLE_DISLIKE,
@@ -10,6 +9,8 @@ import {
   REQ_AN_ARTICLE,
   REQ_AN_ARTICLE_SUCCESS,
   REQ_AN_ARTICLE_FAILURE,
+  POST_ARTICLE_NEW,
+  POST_ARTICLE_NEW_SUCCESS,
 } from "./types";
 
 const articlesReq = () => {
@@ -55,12 +56,22 @@ const getAnArticleFailure = (data) => {
   };
 };
 
-// const articleNewReq = (data) => {
-//   return {
-//     type: REQ_ARTICLE_NEW,
-//     payload: data,
-//   };
-// };
+/* post a new article */
+const postANewArticle = (data) => {
+  console.log(data);
+  return {
+    type: POST_ARTICLE_NEW,
+    payload: data,
+  };
+};
+
+const postANewArticleSuccess = (data) => {
+  console.log(data);
+  return {
+    type: POST_ARTICLE_NEW_SUCCESS,
+    payload: data,
+  };
+};
 
 // const articleEditReq = (data) => {
 //   return {
@@ -85,3 +96,4 @@ const getAnArticleFailure = (data) => {
 
 export { articlesReq, articlesReqSuccess, articlesReqFailure };
 export { getAnArticle, getAnArticleSuccess, getAnArticleFailure };
+export { postANewArticle, postANewArticleSuccess };
