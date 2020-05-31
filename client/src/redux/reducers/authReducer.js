@@ -2,7 +2,7 @@
 import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "../actions/types.js";
 import { loadState } from "../store/localStorage";
 
-const auth = loadState().buzzfeed.auth;
+const auth = loadState() ? loadState().buzzfeed.auth : {};
 
 const authReducer = (state = auth, action) => {
   switch (action.type) {
