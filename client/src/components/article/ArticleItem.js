@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import moment from 'moment'
 
 function ArticleItem(props) {
   const {
@@ -12,7 +13,7 @@ function ArticleItem(props) {
     createdAt,
   } = props.article;
 
-  const date = Date.now(createdAt).toLocaleString();
+  const date = moment(createdAt).fromNow();
 
   return (
     <li class='article-item'>

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import moment from "moment";
 
 import LoadingSpinner from "../common/LoadingSpinner";
 import { getAnArticle } from "../../redux/actions/article";
@@ -9,7 +10,7 @@ function ArticleFull({ match, getAnArticle, article }) {
   const articleId = match.params.articleId;
   useEffect(() => {
     getAnArticle(articleId);
-  }, [articleId]);
+  }, [articleId, getAnArticle]);
 
   if (article) {
     const {
@@ -22,6 +23,8 @@ function ArticleFull({ match, getAnArticle, article }) {
       totalDislikes,
       createdAt,
     } = article;
+    const date = moment(createdAt).fromNow();
+
     return (
       <div class='main-bar'>
         <div class='article-item'>
@@ -42,7 +45,7 @@ function ArticleFull({ match, getAnArticle, article }) {
                   {authorId.firstName}
                 </Link>
               </span>
-              <span> 2 hours ago</span>
+              <span>{date}</span>
             </span>
           </div>
           <div class='article-item-first-row'>
