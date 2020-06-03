@@ -13,18 +13,17 @@ exports.signup = (req, res) => {
     console.log(errors);
     return res.status(422).json({
       error: errors.array()[0].msg,
-      param: errors.array()[0].param,
-      // allErrors: errors.array()
+      param: errors.array()[0].param, 
     });
   }
 
   // 2. create a new user for given valid values
-  const user = new User(req.body);
+  const user = new User(req.user);
 
   // 3. save the new user to db
   user.save((err, user) => {
     // 3.1 if any error like reusing same email throw an error
-    if (err) {
+    if (err) { 
       return res.status(400).json({
         err: "NOT able to save user in DB",
       });
@@ -65,7 +64,8 @@ exports.signin = (req, res) => {
     // 3.2 if user exists then verify the password. In case wrong password throw an error
     if (!user.authenticate(password)) {
       return res.status(401).json({
-        error: "Email and Password donot match",
+        message: "Email and Password donot match",
+        // error: "Email and Password donot match",
       });
     }
 
@@ -74,10 +74,11 @@ exports.signin = (req, res) => {
     // 5 store the generated tokens in cookie
     res.cookie("token", token, { expire: new Date() + 9999 });
     // 6 send response to frontend
-    const { _id, name, email, role } = user;
+    // console.log(user)
+    const { _id, firstName, email, role } = user;
     return res.json({
       token,
-      user: { _id, name, email, role },
+      user: { _id, firstName, email, role },
     });
   });
 };

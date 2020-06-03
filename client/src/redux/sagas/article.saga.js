@@ -59,7 +59,6 @@ function* postAnArticleAsync(action) {
       ...action.payload,
       authorId: auth._id,
     });
-    console.log(response);
     yield put(postANewArticleSuccess(response.data));
   } catch (error) {
     console.log(error);

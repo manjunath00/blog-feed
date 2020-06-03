@@ -5,7 +5,8 @@ const { validationResult } = require("express-validator");
 // middleware to populate req.profile
 exports.getUserById = (req, res, next, userId) => {
   User.findById(userId)
-    .populate("categoryPreferences", "_id categoryName")
+    .populate("categoryPreferences", "_id categoryName")    
+
     .exec((err, user) => {
       if (err || !user) {
         console.log(err, user);
