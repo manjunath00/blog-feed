@@ -4,6 +4,8 @@ const { check } = require("express-validator");
 
 const { signout, signup, signin } = require("../controllers/auth");
 
+const { parseFieldsSignUp } = require("../middleware/auth");
+
 router.post(
   "/signup",
   [
@@ -21,6 +23,7 @@ router.post(
       .isLength({ min: 3 })
       .withMessage("Password must be atleast 3 characters long"),
   ],
+  parseFieldsSignUp,
   signup
 );
 
