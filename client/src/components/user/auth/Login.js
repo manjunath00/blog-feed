@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 
-import { loginStart } from "../../../redux/actions/login";
+import { loginStart } from "../../../redux/actions/auth";
 import Field from "../../common/Field";
 
 function Login({ loginStart }) {
