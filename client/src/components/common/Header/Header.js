@@ -2,7 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { signoutStart } from "../../../redux/actions/login";
+import { signoutStart } from "../../../redux/actions/auth";
 
 function Header({ isAuthenticated, userName, signoutStart }) {
   const onSignOut = () => {
