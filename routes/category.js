@@ -28,6 +28,8 @@ router.get(
 
 router.get("/category/:userId", isSignedIn, isAuthenticated, getAllCategory);
 
+router.get("/category", getAllCategory);
+
 // create
 router.post(
   "/category/create/:userId",
