@@ -6,7 +6,7 @@ import ArticleItem from "../ArticleItem";
 import { articlesReq } from "../../../redux/actions/article";
 import LoadingSpinner from "../../common/LoadingSpinner";
 
-function Mainbar({ articles, articlesReq }) { 
+function Mainbar({ articles, articlesReq }) {
   useEffect(() => {
     articlesReq();
   }, []);
