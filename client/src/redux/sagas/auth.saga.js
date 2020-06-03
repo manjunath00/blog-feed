@@ -2,9 +2,14 @@
 import { takeEvery, call, all, put, takeLatest } from "redux-saga/effects";
 import Cookies from "js-cookie";
 
-import { loginSuccess, loginFailed, signoutSuccess } from "../actions/login";
-import { LOGIN_START, SIGN_OUT_START } from "../actions/types";
-import { loginApi, signout } from "../../api/apicalls";
+import {
+  loginSuccess,
+  loginFailed,
+  signoutSuccess,
+  signUpSuccess,
+} from "../actions/auth";
+import { LOGIN_START, SIGN_OUT_START, SIGN_UP_START } from "../actions/types";
+import { loginApi, signout, signUp } from "../../api/apicalls";
 
 function* loginAsync(action) {
   try {
@@ -23,9 +28,17 @@ function* loginAsync(action) {
 
 function* signoutAsync() {
   try {
-    console.log("Started signing out");
-    const response = yield call(signout);  
+    const response = yield call(signout);
     yield put(signoutSuccess());
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function* signUpAsync(action) {
+  try {
+    const response = yield call(signUp, action.payload);
+    yield put(signUpSuccess(response.data));
   } catch (error) {
     console.log(error);
   }
@@ -39,6 +52,10 @@ function* signoutWatcher() {
   yield takeEvery(SIGN_OUT_START, signoutAsync);
 }
 
+function* signUpWatcher() {
+  yield takeEvery(SIGN_UP_START, signUpAsync);
+}
+
 export function* loginSaga() {
-  yield all([call(loginWatcher), call(signoutWatcher)]);
+  yield all([call(loginWatcher), call(signoutWatcher), call(signUpWatcher)]);
 }
