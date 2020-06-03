@@ -35,3 +35,16 @@ export const signout = () => {
   const url = endpoints.signout();
   return buzzfeed.get(url);
 };
+
+/* get all categories */
+export const allCategories = () => {
+  const url = endpoints.allCategories();
+  return buzzfeed.get(url);
+};
+
+/* user sign up */
+export const signUp = (body) => {
+  console.log("Body is ", body);
+  const url = endpoints.signUp();
+  return buzzfeed.post(url, body);
+};
