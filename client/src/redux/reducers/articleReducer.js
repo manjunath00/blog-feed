@@ -20,8 +20,6 @@ const articleReducer = (state = articles, action) => {
   switch (action.type) {
     case REQ_ARTICLES_SUCCESS:
       return { all: action.payload, newArticle: false };
-    case REQ_ARTICLES_FAILURE:
-      return { ...state, ...action.payload, newArticle: false };
     case REQ_AN_ARTICLE_SUCCESS:
       return { ...state, article: action.payload, newArticle: false };
     case POST_ARTICLE_NEW_SUCCESS:
