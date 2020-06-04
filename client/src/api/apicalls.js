@@ -1,5 +1,10 @@
 import endpoints from "./endpoints";
 import { buzzfeed } from "./buzzfeed";
+import Cookies from "js-cookie";
+
+const tokenHeader = () => {
+  return { Authorization: `Bearer ${Cookies.get("token")}` };
+};
 
 export const loginApi = (data) => {
   const url = endpoints.login();
@@ -9,13 +14,13 @@ export const loginApi = (data) => {
 /* user's feed */
 export const getUsersFeed = (userId, token) => {
   const url = endpoints.getUsersFeed(userId);
-  return buzzfeed.get(url);
+  return buzzfeed.get(url, tokenHeader());
 };
 
 /* user's preferred categories */
 export const getUserCategories = (userId) => {
   const url = endpoints.usersCategories(userId);
-  return buzzfeed.get(url);
+  return buzzfeed.get(url, tokenHeader());
 };
 
 /* get an article */
