@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import CategoryOptions from "./CategoryOptions";
 import { reqUserCategories } from "../../redux/actions/category";
 import { postANewArticle } from "../../redux/actions/article";
-import LoadingSpinner from "../common/LoadingSpinner";
+import { LoadingSpinner } from "../common";
 
 function ArticleNew(props) {
   const [category, setCategory] = useState();

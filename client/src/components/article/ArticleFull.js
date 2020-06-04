@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import moment from "moment";
 
-import LoadingSpinner from "../common/LoadingSpinner";
+import { LoadingSpinner } from "../common";
 import { getAnArticle } from "../../redux/actions/article";
 
 function ArticleFull({ match, getAnArticle, article }) {

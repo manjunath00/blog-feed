@@ -2,10 +2,15 @@ import React from "react";
 import { withRouter, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
-import Base from "./components/common/Base";
-import PrivateRoute from "./components/common/PrivateRoute";
+import { PrivateRoute, Base } from "./components/common";
 import { ArticleFeed, ArticleNew, ArticleFull } from "./components/article";
-import { Login, Signup, Settings, Dashboard } from "./components/user";
+import {
+  Login,
+  Signup,
+  Settings,
+  Dashboard,
+  AuthorFeed,
+} from "./components/user";
 import { CategoryFeed } from "./components/category";
 
 function App(props) {
@@ -51,16 +56,24 @@ function App(props) {
           />
         </Switch>
 
-        {/* <Switch> */}
-
-        <PrivateRoute exact={true} path='/user/settings' component={Settings} />
-        <PrivateRoute
-          exact={true}
-          path='/user/dashboard'
-          component={Dashboard}
-        />
-        {/* </Switch> */}
+        <Switch>
+          <PrivateRoute
+            exact={true}
+            path='/user/settings'
+            component={Settings}
+          />
+          <PrivateRoute
+            exact={true}
+            path='/user/dashboard'
+            component={Dashboard}
+          />
+        </Switch>
       </Switch>
+      <PrivateRoute
+        exact={true}
+        path='/author/:authorId'
+        component={AuthorFeed}
+      />
     </Base>
   );
 }

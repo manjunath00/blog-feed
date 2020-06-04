@@ -1,7 +1,7 @@
-import Login from "./auth/Login";
-import Signup from "./auth/Signup";
+import { Login, Signup } from "./auth";
 
 import Settings from "./settings/Setting";
 import Dashboard from "./dashboard/Dashboard";
+import AuthorFeed from "./AuthorFeed";
 
-export { Login, Signup, Settings, Dashboard };
+export { Login, Signup, Settings, Dashboard, AuthorFeed };
