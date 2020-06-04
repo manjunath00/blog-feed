@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 
-import ArticleItem from "../article/ArticleItem";
+import { XFeed } from "../article";
+import { reqArticlesByCategory } from "../../redux/actions/article";
+import { LoadingSpinner } from "../common";
 
-function CategoryFeed() {
-  return <div>Category Feed</div>;
+function CategoryFeed({ match, articles, reqArticlesByCategory }) {
+  const categoryId = match.params.categoryId;
+  useEffect(() => {
+    reqArticlesByCategory(categoryId);
+  }, []);
+  return <>{articles ? <XFeed articles={articles} /> : <LoadingSpinner />}</>;
 }
 
-export default CategoryFeed;
+const mapStateToProps = (state) => {
+  return { articles: state.articles.articlesByCategory || [] };
+};
+
+export default connect(mapStateToProps, { reqArticlesByCategory })(
+  CategoryFeed
+);
