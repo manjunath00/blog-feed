@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-import Field from "../../common/Field";
-import Checkbox from "../../common/Checkbox";
-import LoadingSpinner from "../../common/LoadingSpinner";
+import { Field, Checkbox, LoadingSpinner } from "../../common";
 import { signUpStart } from "../../../redux/actions/auth";
 import { getAllCategories } from "../../../redux/actions/category";
 
@@ -30,7 +28,7 @@ function Signup({ signUpStart, getAllCategories, allCategories }) {
       phone,
       password,
       dateOfBirth: dob,
-      categoryPreferences:selectedCategories,
+      categoryPreferences: selectedCategories,
     };
 
     signUpStart(user);

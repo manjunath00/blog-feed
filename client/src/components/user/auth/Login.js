@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import { loginStart } from "../../../redux/actions/auth";
-import Field from "../../common/Field";
+import { Field } from "../../common";
 
 function Login({ loginStart }) {
   const [email, setEmail] = useState("");
