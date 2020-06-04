@@ -40,8 +40,18 @@ app.get("/", (req, res) => {
   res.send("<h2>Home screen</h2>");
 });
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html")); // relative path
+  });
+}
+
 //port
 const PORT = process.env.PORT;
 
 //Starting the server
-app.listen(PORT, () => console.log(`Server started at http://localhost:${PORT}`));
+app.listen(PORT, () =>
+  console.log(`Server started at http://localhost:${PORT}`)
+);
