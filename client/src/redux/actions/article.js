@@ -11,7 +11,12 @@ import {
   REQ_AN_ARTICLE_FAILURE,
   POST_ARTICLE_NEW,
   POST_ARTICLE_NEW_SUCCESS,
+  REQ_ARTICLES_AUTHOR,
+  REQ_ARTICLES_AUTHOR_SUCCESS,
+  REQ_ARTICLES_CATEGORY,
+  REQ_ARTICLES_CATEGORY_SUCCESS,
 } from "./types";
+import { connect } from "react-redux";
 
 const articlesReq = () => {
   return {
@@ -73,6 +78,35 @@ const postANewArticleSuccess = (data) => {
   };
 };
 
+/* articles by author */
+const reqArticleByAuthor = (userId) => { 
+  return {
+    type: REQ_ARTICLES_AUTHOR,
+    payload: userId,
+  };
+};
+
+const reqArticleByAuthorSuccess = (articles) => {
+  return {
+    type: REQ_ARTICLES_AUTHOR_SUCCESS,
+    payload: articles,
+  };
+};
+
+const reqArticlesByCategorySuccess = (articles) => {
+  return {
+    type: REQ_ARTICLES_CATEGORY_SUCCESS,
+    payload: articles,
+  };
+};
+
+const reqArticlesByCategory = (categoryId) => { 
+  return {
+    type: REQ_ARTICLES_CATEGORY,
+    payload: categoryId,
+  };
+};
+
 // const articleEditReq = (data) => {
 //   return {
 //     type: REQ_ARTICLE_EDIT,
@@ -97,3 +131,10 @@ const postANewArticleSuccess = (data) => {
 export { articlesReq, articlesReqSuccess, articlesReqFailure };
 export { getAnArticle, getAnArticleSuccess, getAnArticleFailure };
 export { postANewArticle, postANewArticleSuccess };
+
+export {
+  reqArticleByAuthor,
+  reqArticleByAuthorSuccess,
+  reqArticlesByCategory,
+  reqArticlesByCategorySuccess,
+};

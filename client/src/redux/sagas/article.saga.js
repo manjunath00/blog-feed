@@ -13,6 +13,8 @@ import {
   REQ_ARTICLES,
   REQ_AN_ARTICLE,
   POST_ARTICLE_NEW,
+  REQ_ARTICLES_AUTHOR,
+  REQ_ARTICLES_CATEGORY,
 } from "../actions/types";
 
 import {
@@ -20,6 +22,8 @@ import {
   articlesReqFailure,
   getAnArticleSuccess,
   postANewArticleSuccess,
+  reqArticleByAuthorSuccess,
+  reqArticlesByCategorySuccess,
 } from "../actions/article";
 
 import {
@@ -65,6 +69,24 @@ function* postAnArticleAsync(action) {
   }
 }
 
+function* reqArticlesByAuthorAsync(action) {
+  try {
+    const response = [];
+    yield put(reqArticleByAuthorSuccess(response));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function* reqArticlesByCategoryAsync(action) {
+  try {
+    const response = [];
+    yield put(reqArticlesByCategorySuccess(response));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 function* usersFeedWatcher() {
   yield takeEvery(REQ_ARTICLES, getUsersFeedAsync);
 }
@@ -77,10 +99,19 @@ function* newArticleWatcher() {
   yield takeEvery(POST_ARTICLE_NEW, postAnArticleAsync);
 }
 
+function* articlesByAuthorWatcher() {
+  yield takeLatest(REQ_ARTICLES_AUTHOR, reqArticlesByAuthorAsync);
+}
+
+function* articlesByCategoryWatcher() {
+  yield takeLatest(REQ_ARTICLES_CATEGORY, reqArticlesByCategoryAsync);
+}
 export function* articleSaga() {
   yield all([
     call(usersFeedWatcher),
     call(getAnArticleWatcher),
     call(newArticleWatcher),
+    call(articlesByAuthorWatcher),
+    call(articlesByCategoryWatcher),
   ]);
 }
