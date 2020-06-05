@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import moment from 'moment'
+import moment from "moment";
+import { connect } from "react-redux";
+
+import { articleLikeReq, articleDislikeReq } from "../../redux/actions/article";
 
 function ArticleItem(props) {
   const {
@@ -14,6 +17,14 @@ function ArticleItem(props) {
   } = props.article;
 
   const date = moment(createdAt).fromNow();
+
+  const onLikeHandle = () => { 
+    props.articleLikeReq(_id);
+  };
+
+  const onDislikeHandle = () => { 
+    props.articleDislikeReq(_id);
+  };
 
   return (
     <li class='article-item'>
@@ -42,13 +53,13 @@ function ArticleItem(props) {
       </div>
       <div class='article-third-row'>
         <span class='article-item-cta'>
-          <button>
+          <button onClick={() => onLikeHandle()}>
             <i class='fas fa-thumbs-up like'></i>
           </button>
           <span>{totalLikes}</span>
         </span>
         <span class='article-item-cta'>
-          <button>
+          <button onClick={() => onDislikeHandle()}>
             <i class='fas fa-thumbs-down dislike'></i>
           </button>
           <span>{totalDislikes}</span>
@@ -63,31 +74,6 @@ function ArticleItem(props) {
   );
 }
 
-export default ArticleItem;
-
-/* 
-     {
-        "_id": "5ebfcbda9992e0314c12bae3",
-        "articleName": "Hackers target supercomputers researching Covid-19 in Switzerland, Germany, UK",
-        "articleBody": "Agencies investigating the hacking say potential theft of information could jeopardise the delivery of secure, effective, and efficient treatment options.",
-        "authorId": {
-            "_id": "5eb45be59d6abe3c18775609",
-            "firstName": "John"
-        },
-        "categoryId": {
-            "_id": "5eb4776faa07a80db421ec7a",
-            "categoryName": "Technology"
-        },
-        "likedBy": [],
-        "dislikedBy": [],
-        "blockedBy": [],
-        "createdAt": "2020-05-16T11:17:46.046Z",
-        "updatedAt": "2020-05-16T11:17:46.046Z",
-        "isLiked": false,
-        "isDisliked": false,
-        "isBlocked": false,
-        "totalLikes": 0,
-        "totalDislikes": 0
-    }
-
-*/
+export default connect(null, { articleLikeReq, articleDislikeReq })(
+  ArticleItem
+);
