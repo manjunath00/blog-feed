@@ -1,8 +1,6 @@
 /* eslint-disable */
 import {
   // REQ_ARTICLE_EDIT,
-  // REQ_ARTICLE_LIKE,
-  // REQ_ARTICLE_DISLIKE,
   REQ_ARTICLES,
   REQ_ARTICLES_SUCCESS,
   REQ_ARTICLES_FAILURE,
@@ -15,8 +13,11 @@ import {
   REQ_ARTICLES_AUTHOR_SUCCESS,
   REQ_ARTICLES_CATEGORY,
   REQ_ARTICLES_CATEGORY_SUCCESS,
+  REQ_ARTICLE_LIKE_SUCCESS,
+  REQ_ARTICLE_LIKE,
+  REQ_ARTICLE_DISLIKE,
+  REQ_ARTICLE_DISLIKE_SUCCESS,
 } from "./types";
-import { connect } from "react-redux";
 
 const articlesReq = () => {
   return {
@@ -79,7 +80,7 @@ const postANewArticleSuccess = (data) => {
 };
 
 /* articles by author */
-const reqArticleByAuthor = (userId) => { 
+const reqArticleByAuthor = (userId) => {
   return {
     type: REQ_ARTICLES_AUTHOR,
     payload: userId,
@@ -93,6 +94,8 @@ const reqArticleByAuthorSuccess = (articles) => {
   };
 };
 
+/* articles by category */
+
 const reqArticlesByCategorySuccess = (articles) => {
   return {
     type: REQ_ARTICLES_CATEGORY_SUCCESS,
@@ -100,33 +103,49 @@ const reqArticlesByCategorySuccess = (articles) => {
   };
 };
 
-const reqArticlesByCategory = (categoryId) => { 
+const reqArticlesByCategory = (categoryId) => {
   return {
     type: REQ_ARTICLES_CATEGORY,
     payload: categoryId,
   };
 };
 
-// const articleEditReq = (data) => {
-//   return {
-//     type: REQ_ARTICLE_EDIT,
-//     payload: data,
-//   };
-// };
+const articleEditReq = (data) => {
+  return {
+    type: REQ_ARTICLE_EDIT,
+    payload: data,
+  };
+};
 
-// const articleLikeReq = (data) => {
-//   return {
-//     type: REQ_ARTICLE_LIKE,
-//     payload: data,
-//   };
-// };
+/* LIKE an article */
 
-// const articleDislikeReq = (data) => {
-//   return {
-//     type: REQ_ARTICLE_DISLIKE,
-//     payload: data,
-//   };
-// };
+const articleLikeReq = (articleId) => {
+  return {
+    type: REQ_ARTICLE_LIKE,
+    payload: articleId,
+  };
+};
+
+const articleLikeReqSuccess = (data) => {
+  return {
+    type: REQ_ARTICLE_LIKE_SUCCESS,
+  };
+};
+
+/* DISLIKE an article */
+
+const articleDislikeReq = (articleId) => {
+  return {
+    type: REQ_ARTICLE_DISLIKE,
+    payload: articleId,
+  };
+};
+
+const articleDislikeReqSuccess = (data) => {
+  return {
+    type: REQ_ARTICLE_DISLIKE_SUCCESS,
+  };
+};
 
 export { articlesReq, articlesReqSuccess, articlesReqFailure };
 export { getAnArticle, getAnArticleSuccess, getAnArticleFailure };
@@ -137,4 +156,11 @@ export {
   reqArticleByAuthorSuccess,
   reqArticlesByCategory,
   reqArticlesByCategorySuccess,
+};
+
+export {
+  articleLikeReq,
+  articleLikeReqSuccess,
+  articleDislikeReq,
+  articleDislikeReqSuccess,
 };

@@ -15,6 +15,8 @@ import {
   POST_ARTICLE_NEW,
   REQ_ARTICLES_AUTHOR,
   REQ_ARTICLES_CATEGORY,
+  REQ_ARTICLE_LIKE,
+  REQ_ARTICLE_DISLIKE,
 } from "../actions/types";
 
 import {
@@ -24,6 +26,8 @@ import {
   postANewArticleSuccess,
   reqArticleByAuthorSuccess,
   reqArticlesByCategorySuccess,
+  articleLikeReqSuccess,
+  articleDislikeReqSuccess,
 } from "../actions/article";
 
 import {
@@ -87,6 +91,28 @@ function* reqArticlesByCategoryAsync(action) {
   }
 }
 
+/* LIKE an article */
+function* likeAnArticleAsync(action) {
+  try {
+    const response = [];
+    yield put(articleLikeReqSuccess(response));
+    yield put({ type: REQ_ARTICLES });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+/* dislike an article */
+function* disLikeAnArticleAsync(action) {
+  try {
+    const response = [];
+    yield put(articleDislikeReqSuccess(response));
+    yield put({ type: REQ_ARTICLES });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 function* usersFeedWatcher() {
   yield takeEvery(REQ_ARTICLES, getUsersFeedAsync);
 }
@@ -106,6 +132,15 @@ function* articlesByAuthorWatcher() {
 function* articlesByCategoryWatcher() {
   yield takeLatest(REQ_ARTICLES_CATEGORY, reqArticlesByCategoryAsync);
 }
+
+function* likeAnArticleWatcher() {
+  yield takeLatest(REQ_ARTICLE_LIKE, likeAnArticleAsync);
+}
+
+function* disLikeAnArticleWatcher() {
+  yield takeLatest(REQ_ARTICLE_DISLIKE, disLikeAnArticleAsync);
+}
+
 export function* articleSaga() {
   yield all([
     call(usersFeedWatcher),
@@ -113,5 +148,7 @@ export function* articleSaga() {
     call(newArticleWatcher),
     call(articlesByAuthorWatcher),
     call(articlesByCategoryWatcher),
+    call(likeAnArticleWatcher),
+    call(disLikeAnArticleWatcher),
   ]);
 }
