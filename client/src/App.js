@@ -3,22 +3,16 @@ import { withRouter, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { PrivateRoute, Base } from "./components/common";
-import { ArticleFeed, ArticleNew, ArticleFull } from "./components/article";
-import {
-  Login,
-  Signup,
-  Settings,
-  Dashboard,
-  AuthorFeed,
-} from "./components/user";
-import { CategoryFeed } from "./components/category";
+import { ArticleFeed } from "./components/article";
+import { Login, Signup } from "./components/user";
+import routes from "./routes";
 
 function App(props) {
   return (
     <Base>
       <Route exact={true} path='/signup' component={Signup} />
       <Route
-        exact={true}
+        exact
         path='/'
         render={() => {
           if (props.isAuthenticated) {
@@ -29,51 +23,10 @@ function App(props) {
         }}
       />
       <Switch>
-        {/* <Switch> */}
-        <PrivateRoute
-          exact={true}
-          path='/category/:categoryId'
-          component={CategoryFeed}
-        />
-        <PrivateRoute
-          exact={true}
-          path='/category/:categorddyId'
-          component={CategoryFeed}
-        />
-        {/* </Switch> */}
-
-        <Switch>
-          <PrivateRoute
-            exact={true}
-            path='/article/view/:articleId'
-            component={ArticleFull}
-          />
-          <PrivateRoute exact path='/article/new' component={ArticleNew} />
-          <PrivateRoute
-            exact={true}
-            path='/article/edit/:id'
-            component={ArticleNew}
-          />
-        </Switch>
-
-        <Switch>
-          <PrivateRoute
-            exact={true}
-            path='/user/settings'
-            component={Settings}
-          />
-          <PrivateRoute
-            exact={true}
-            path='/user/dashboard'
-            component={Dashboard}
-          />
-        </Switch>
+        {routes.map((route) => (
+          <PrivateRoute {...route} />
+        ))}
       </Switch>
-      <PrivateRoute
-        exact={true}
-        path='/author/:authorId'
-        component={AuthorFeed}
-      />
     </Base>
   );
 }
