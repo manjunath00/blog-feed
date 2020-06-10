@@ -36,10 +36,7 @@ app.use("/api", authRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", articleRoutes);
 app.use("/api", userRoutes);
-
-app.get("/", (req, res) => {
-  res.send("<h2>Home screen</h2>");
-});
+ 
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
