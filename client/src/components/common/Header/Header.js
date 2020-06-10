@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { signoutStart } from "../../../redux/actions/auth";
@@ -13,24 +13,30 @@ function Header({ isAuthenticated, userName, signoutStart }) {
     return (
       <ul>
         <li>
-          <Link class='nav-link n-link-active' to='/user/dashboard'>
+          <NavLink
+            activeClassName='n-link-active'
+            class='nav-link'
+            to='/user/dashboard'>
             <i class='fas fa-user hide-mobile'></i>
             <span class='nav-link__text'>{username}</span>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link class='nav-link' to='/user/settings'>
+          <NavLink
+            activeClassName='n-link-active'
+            class='nav-link'
+            to='/user/settings'>
             <i class='fas fa-cog hide-mobile'></i>
             <span class='nav-link__text'>settings</span>
-          </Link>
+          </NavLink>
         </li>
         <li>
-          <Link class='nav-link' to='/'>
+          <NavLink activeClassName='n-link-active' class='nav-link' to='/'>
             <i class='fas fa-power-off hide-mobile'></i>
             <span class='nav-link__text' onClick={onSignOut}>
               log out
             </span>
-          </Link>
+          </NavLink>
         </li>
       </ul>
     );
@@ -62,9 +68,9 @@ function Header({ isAuthenticated, userName, signoutStart }) {
       <header class='header'>
         <ul>
           <li>
-            <Link to='/' class='nav-link__heading' href='#'>
+            <NavLink to='/' class='nav-link__heading' href='#'>
               buzz-feed
-            </Link>
+            </NavLink>
           </li>
         </ul>
         {isAuthenticated ? onAuthenticated(userName) : notAuthenticated()}
