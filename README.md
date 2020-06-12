@@ -17,7 +17,7 @@ npm i && npm start
 ```
 
 ## Link
-Try it out.Link [Here](https://thawing-gorge-21759.herokuapp.com/)
+Try it out.Link [Here](http://buzzfeed-mern.herokuapp.com/)
  
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
