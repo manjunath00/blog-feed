@@ -23,3 +23,35 @@
     transform: rotate(360deg);
   }
 }
+
+.settings {
+  display: flex;
+  width: 100%;
+}
+
+.settings__item {
+  width: 70%;
+}
+
+.nav-link {
+  text-transform: uppercase;
+}
+
+a.n-link-active {
+  text-transform: uppercase;
+  margin: 1rem;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.checkbox {
+  margin: 0.25rem;
+}
+
+.dashboard__list-item a, .dashboard__list-item a:hover {
+  cursor: pointer;
+}
+ 
+ 

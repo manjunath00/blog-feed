@@ -5,9 +5,9 @@ import DashboardList from "./DashboardList";
 
 function Dashboard() {
   return (
-    <div className="dashboard">
+    <div className='dashboard'>
       <DashboardList />
-      <ul className="dashboard__items">
+      <ul className='dashboard__items'>
         <DashboardArticle />
         <DashboardArticle />
         <DashboardArticle />
