@@ -5,14 +5,14 @@
   "main": "index.js",
   "engines": {
     "node": "12.13.0",
-    "npm": "6.14.4"
+    "yarn": "1.22.4"
   },
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
-    "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run server\" \" npm run client\"",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "client": "yarn run start --prefix client",
+    "dev": "concurrently \"yarn run server\" \" yarn run client\"",
+    "heroku-postbuild": "cd client && yarn install && yarn run build"
   },
   "author": "",
   "license": "ISC",
