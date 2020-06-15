@@ -17,6 +17,11 @@ npm i && npm start
 ```
 
 ## Link
+``
+email: john@gmail.com
+password: 1234567890
+``
+Login with above credentials 
 Try it out.Link [Here](http://buzzfeed-mern.herokuapp.com/)
  
 ## License
